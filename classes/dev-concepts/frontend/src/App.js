@@ -1,15 +1,18 @@
 import './App.css'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import BackgroundImage from './assets/background.jpg'
 import Header from './components/Header';
+import api from './services/api'
 
 const App = () => {
-    const [projects, setProjects] = useState([
-        'Development of app',
-        'Front-end web'
-    ]);
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        api.get('/projects').then(response => {
+            setProjects(response.data || []);
+        });
+    }, []);
 
     const handleAddProject = () => {
         setProjects(projectsOld => [
@@ -22,11 +25,9 @@ const App = () => {
         <>
             <Header title="Home" />
 
-            <img width={300} src={BackgroundImage} />
-
             <ul>
-                {projects.map(project => (
-                    <li key={project}>{project}</li>
+                {projects.map(({id, title, owner}) => (
+                    <li key={id}>{title} {"|->"} {owner}</li>
                 ))}
             </ul>
 
