@@ -14,10 +14,17 @@ const App = () => {
         });
     }, []);
 
-    const handleAddProject = () => {
+    const handleAddProject = async () => {
+        const response = await api.post('/projects', {
+            title: `New project at ${Date.now()}`,
+            owner: 'Djpremier',
+        });
+        
+        const newProject = response.data;
+
         setProjects(projectsOld => [
             ...projectsOld,
-            `New project ${Date.now()}`
+            newProject,
         ]);
     };
 
