@@ -6,7 +6,9 @@ const appointmentsRouter = Router();
 const appointmentsRepository = new AppointmentsRepository();
 
 appointmentsRouter.get('/', (req, res) => {
-  // TODO
+  const appointments = appointmentsRepository.all();
+
+  return res.json(appointments);
 });
 
 appointmentsRouter.post('/', (req, res) => {
