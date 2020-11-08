@@ -12,6 +12,7 @@
     "mikestead.dotenv",
     "editorconfig.editorconfig",
     "perkovec.emoji",
+    "dbaeumer.vscode-eslint",
     "eamodio.gitlens",
     "vtrois.gitmoji-vscode",
     "pkief.material-icon-theme",
