@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import User from '../models/User';
 import CreateUserService from '../services/CreateUserService';
 
@@ -12,7 +13,7 @@ usersRouter.get('/', async (req, res) => {
   return res.json(users);
 });
 
-usersRouter.post('/', async (req, res) => {
+usersRouter.post('/', ensureAuthenticated, async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
