@@ -20,6 +20,8 @@ usersRouter.post('/', async (req, res) => {
 
     const user = await createUser.execute({ name, email, password });
 
+    delete user.password;
+
     return res.json(user);
   } catch (e) {
     return res.status(400).json({ error: e.message });
