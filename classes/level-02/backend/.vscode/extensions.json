@@ -1,9 +1,6 @@
 {
   "recommendations": [
     "bierner.emojisense",
-    "formulahendry.auto-close-tag",
-    "formulahendry.auto-complete-tag",
-    "formulahendry.auto-rename-tag",
     "bladnman.auto-align",
     "aaron-bond.better-comments",
     "streetsidesoftware.code-spell-checker",
