@@ -1,52 +1,62 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 import { FiChevronRight } from 'react-icons/fi'
+import api from '../../services/api'
 
 import logoImg from '../../assets/logo.svg';
 
 import { Title, Form, Repositories } from './styles'
 
+interface Repository {
+    full_name: string;
+    description: string;
+    owner: {
+        login: string;
+        avatar_url: string;
+    };
+}
+
 const Dashboard: FC = () => {
+    const [newRepo, setNewRepo] = useState('')
+    const [repositories, setRepositories] = useState<Repository[]>([]);
+
+    const handleAddRepository = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const response = await api.get<Repository>(`repos/${newRepo}`);
+
+        const repository = response.data;
+
+        setRepositories([...repositories, repository]);
+        setNewRepo('');
+    }
+
     return (
         <>
             <img src={logoImg} alt="GitHub Explorer" />
             <Title>Explore repositórios no GitHub</Title>
 
-            <Form action="">
-                <input placeholder="Digite o nome do repositório" />
+            <Form onSubmit={handleAddRepository}>
+                <input
+                    value={newRepo}
+                    onChange={e => setNewRepo(e.target.value)}
+                    placeholder="Digite o nome do repositório"
+                />
 
                 <button type="submit">Pesquisar</button>
             </Form>
 
             <Repositories>
-                <a href="https://github.com/djpremier/GoStack-2020">
-                    <img src="https://avatars2.githubusercontent.com/u/17091381?s=460&u=71171e4476b77ceaf1be9b732a0b9b8d82760a7d&v=4" alt="Djpremier" />
-                    <div>
-                        <strong>Djpremier/GoStack-2020</strong>
-                        <p>All projects and files built during the Bootcamp GoStack 2020</p>
-                    </div>
+                {repositories.map(repository => (
+                    <a key={repository.full_name} href="https://github.com/djpremier/GoStack-2020">
+                        <img src={repository.owner.avatar_url} alt={repository.owner.login} />
+                        <div>
+                            <strong>{repository.full_name}</strong>
+                            <p>{repository.description}</p>
+                        </div>
 
-                    <FiChevronRight size={20} />
-                </a>
-
-                <a href="https://github.com/djpremier/GoStack-2020">
-                    <img src="https://avatars2.githubusercontent.com/u/17091381?s=460&u=71171e4476b77ceaf1be9b732a0b9b8d82760a7d&v=4" alt="Djpremier" />
-                    <div>
-                        <strong>Djpremier/GoStack-2020</strong>
-                        <p>All projects and files built during the Bootcamp GoStack 2020</p>
-                    </div>
-
-                    <FiChevronRight size={20} />
-                </a>
-
-                <a href="https://github.com/djpremier/GoStack-2020">
-                    <img src="https://avatars2.githubusercontent.com/u/17091381?s=460&u=71171e4476b77ceaf1be9b732a0b9b8d82760a7d&v=4" alt="Djpremier" />
-                    <div>
-                        <strong>Djpremier/GoStack-2020</strong>
-                        <p>All projects and files built during the Bootcamp GoStack 2020</p>
-                    </div>
-
-                    <FiChevronRight size={20} />
-                </a>
+                        <FiChevronRight size={20} />
+                    </a>
+                ))}
             </Repositories>
         </>
     )
