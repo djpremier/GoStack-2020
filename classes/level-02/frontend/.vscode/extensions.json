@@ -1,0 +1,24 @@
+{
+  "recommendations": [
+    "bierner.emojisense",
+    "bladnman.auto-align",
+    "aaron-bond.better-comments",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker",
+    "kamikillerto.vscode-colorize",
+    "mikestead.dotenv",
+    "editorconfig.editorconfig",
+    "perkovec.emoji",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "vtrois.gitmoji-vscode",
+    "pkief.material-icon-theme",
+    "rocketseat.theme-omni",
+    "shan.code-settings-sync",
+    "tabnine.tabnine-vscode",
+    "meganrogge.template-string-converter",
+    "gruntfuggly.todo-tree",
+    "visualstudioexptteam.vscodeintellicode",
+    "coenraads.bracket-pair-colorizer-2"
+  ]
+}
