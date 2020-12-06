@@ -21,6 +21,7 @@ import logoImg from '../../assets/logo.png';
 
 import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 import getValidationErrors from '../../utils/getValidationErrors';
+import api from '../../services/api';
 
 interface SignUpFormData {
   name: string;
@@ -51,15 +52,14 @@ const SignUp: FC = () => {
           abortEarly: false,
         });
 
-        // await api.post('users', data);
+        await api.post('users', data);
 
-        // addToast({
-        //   type: 'success',
-        //   title: 'Cadastro realizado!',
-        //   description: 'Você já pode fazer seu logon no GoBarber.',
-        // });
+        Alert.alert(
+          'Cadastro realizado!',
+          'Você já pode fazer seu logon no GoBarber.',
+        );
 
-        // history.push('/');
+        navigation.goBack();
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -75,7 +75,7 @@ const SignUp: FC = () => {
         );
       }
     },
-    [],
+    [navigation],
   );
 
   return (

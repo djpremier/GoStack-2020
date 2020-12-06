@@ -28,6 +28,7 @@ import {
   CreateAccountButtonText,
 } from './styles';
 import getValidationErrors from '../../utils/getValidationErrors';
+import { useAuth } from '../../hooks/auth';
 
 interface SignInFormData {
   email: string;
@@ -38,6 +39,7 @@ const SignIn: FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
+  const { signIn, user } = useAuth();
 
   const handleSignIn = useCallback(
     async (data: SignInFormData): Promise<void> => {
@@ -55,12 +57,10 @@ const SignIn: FC = () => {
           abortEarly: false,
         });
 
-        // await signIn({
-        //   email: data.email,
-        //   password: data.password,
-        // });
-
-        // history.push('/dashboard');
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -76,7 +76,7 @@ const SignIn: FC = () => {
         );
       }
     },
-    [],
+    [signIn],
   );
 
   return (
