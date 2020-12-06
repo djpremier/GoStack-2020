@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  FC,
-  useState,
-  useContext,
-} from 'react';
+import { createContext, useCallback, FC, useState, useContext } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
 import ToastContainer from '../components/ToastContainer';

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { AuthProvider } from './auth';
 import { ToastProvider } from './toast';

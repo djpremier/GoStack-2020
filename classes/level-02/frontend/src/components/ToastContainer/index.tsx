@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTransition } from 'react-spring';
 
 import { ToastMessage } from '../../hooks/toast';
