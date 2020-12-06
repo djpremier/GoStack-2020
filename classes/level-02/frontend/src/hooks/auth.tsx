@@ -26,7 +26,7 @@ interface AuthContextData {
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-export const AuthProvider: FC = ({ children }) => {
+const AuthProvider: FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@GoBarber:token');
     const user = localStorage.getItem('@GoBarber:user');
@@ -66,7 +66,7 @@ export const AuthProvider: FC = ({ children }) => {
   );
 };
 
-export const useAuth = (): AuthContextData => {
+const useAuth = (): AuthContextData => {
   const context = useContext(AuthContext);
 
   if (!context) {
@@ -75,3 +75,5 @@ export const useAuth = (): AuthContextData => {
 
   return context;
 };
+
+export { AuthProvider, useAuth };
